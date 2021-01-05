@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="site.buzhou.dao.SubjectDao">
+
+    <select id="getAllSubject" resultType="site.buzhou.entity.Subject">
+        select * from ooap.subject
+    </select>
+
+    <resultMap id="allSubject" type="site.buzhou.entity.Subject">
+        <result property="Id" column="id"/>
+        <result property="subjectContent" column="root_subject"/>
+        <result property="createdDate" column="date"/>
+        <result property="subjectCreatorEmail" column="creator_email"/>
+    </resultMap>
+
+    <resultMap id="showSubject" type="site.buzhou.entity.ShowSubject">
+        <result property="articleId" column="aid"/>
+        <result property="subjectId" column="sid"/>
+        <result property="subjectTitle" column="root_subject"/>
+        <result property="articleTitle" column="title"/>
+    </resultMap>
+
+    <select id="getAllSubjectAndArticle" resultMap="showSubject">
+         select a.title,a.aid,a.sid, s.root_subject  from ooap.subject s, ooap.article a where a.sid = s.id order by a.time
+    </select>
+
+    <insert id="saveSubject" parameterType="site.buzhou.entity.Subject">
+       insert into ooap.subject values (#{id},#{subject});
+    </insert>
+
+    <update id="updateSubject" parameterType="site.buzhou.entity.Subject">
+        update ooap.subject set subject = #{subjectContent} where id = #{id}
+    </update>
+
+
+    <resultMap id="subject" type="site.buzhou.entity.Subject">
+        <result property="Id" column="id"/>
+        <result property="subjectContent" column="root_subject"/>
+        <result property="createdDate" column="date"/>
+        <result property="subjectCreatorEmail" column="creator_email"/>
+    </resultMap>
+
+    <select id="getSubject" resultMap="subject">
+        select * from ooap.subject where id = #{id}
+    </select>
+
+</mapper>

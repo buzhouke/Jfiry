@@ -1,0 +1,14 @@
+We encountered the following problem:
+1. The code coupling is too poor, the code cannot be dismantled, and it is not easy to dismantle, such as adding, deleting, modifying and checking in one method.
+2. The code has redundant invalid codes, such as some invalid codes in jdbc.
+3. Code naming is not standardized enough, and some naming is unclear.
+4. The spring framework is not fully used and the convenience of the framework is not fully utilized.
+5. No configuration file
+6. Poor logic scalability, such as writing multiple if judgment logic in a Controller
+
+We made the following changes:
+1. Improving methods to improve coupling
+2. Delete redundant codes
+3. Modify the naming of some methods
+4. Refactor with SpringBoot+MyBatis and replace jsp with thymeleaf template engine
+5. Batch replace with idea to process configuration files

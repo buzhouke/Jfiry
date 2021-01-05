@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="site.buzhou.dao.ArticleDao">
+    <resultMap id="showArticle" type="site.buzhou.entity.Article">
+        <result property="articleId" column="aid"/>
+        <result property="subjectId" column="sid"/>
+        <result property="title" column="title"/>
+        <result property="highlights" column="highlight"/>
+        <result property="abstracts" column="abstracts"/>
+        <result property="author" column="author"/>
+        <result property="time" column="time"/>
+        <result property="fileName" column="file_name"/>
+        <result property="filePath" column="file_path"/>
+        <result property="subject" column="subject"/>
+        <result property="IP" column="ip"/>
+    </resultMap>
+
+
+    <select id="getArticleBySubject" resultMap="showArticle">
+        SELECT  `aid`,  `sid`,  `title`,  `highlight`,  LEFT(`abstracts`, 256),  `author`,  `time`,  `file_name`,  `file_path`,  `subject`,  `ip` FROM `ooap`.`article` where sid = #{id}
+    </select>
+
+    <select id="getArticleById" resultMap="showArticle">
+        SELECT  `aid`,  `sid`,  `title`,  `highlight`,  LEFT(`abstracts`, 256),  `author`,  `time`,  `file_name`,  `file_path`,  `subject`,  `ip` FROM `ooap`.`article` where aid = #{id}
+    </select>
+
+    <delete id="deleteArticle">
+        delete from ooap.article where aid = #{id}
+    </delete>
+
+    <update id="updateArticle" parameterType="site.buzhou.entity.Article">
+        update ooap.article set title = #{title},author=#{author},highlight=#{highlight},abstracts=#{abstracts},
+    time=#{time},file_name=#{fileName},file_path=#{filePath},sid=#{subjectId},ip=#{IP}where aid=#{articleId}
+    </update>
+
+
+
+
+<!--    aid,sid,title,highlight,abstracts,author,time-->
+<!--    `file_name` VARCHAR(80) NULL DEFAULT NULL COLLATE 'utf8_general_ci',-->
+<!--    `file_path` VARCHAR(100) NULL DEFAULT NULL COLLATE 'utf8_general_ci',-->
+<!--    `subject` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',-->
+<!--    `ip` VARCHAR(30) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+    private InetAddress IP;
+    private Timestamp time;
+    private String fileName;
+    private String filePath;
+    private int articleId, subjectId;
+    private Subject subject;
+    private String title, author, highlights, abstracts;
+    private String user;
+-->
+
+    <!--
+     List<Article> getArticleBySubject(Subject subject);
+
+    int deleteArticle(String id);
+
+    int UpdateArticle(String id);
+
+    List<Article> getArticleByAuthor(Author author);
+
+    int addArticle(Article article);
+    -->
+
+    <insert id="addArticle" useGeneratedKeys="true">
+
+    </insert>
+</mapper>
